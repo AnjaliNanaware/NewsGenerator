@@ -6,14 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+    <button onclick="getNews()">Click me</button>
     <div id="result"></div>
     <script>
       const API_KEY =
         "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";
 
-        setInterval(() => {
-            getNews();
-        }, 2000);
+     
 
       async function getNews() {
         const response = await fetch(
