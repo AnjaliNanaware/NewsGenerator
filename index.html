@@ -6,42 +6,41 @@
     <title>Document</title>
 </head>
 <body>
+    Enter a topic for news: <input id="input" type="text" />
     <button onclick="getNews()">Click me</button>
     <div id="result"></div>
    
 </body>
-     <script>
-      const API_KEY =
-        "apikey";
+<script>
+  const topic = document.getElementById("input");
+  async function getNews() {
 
-     
 
-      async function getNews() {
-        const response = await fetch(
-          "https://api.groq.com/openai/v1/chat/completions",
-          {
-            method: "POST",
+    const response = await fetch(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+            method: "POST", // Ensure this is POST
             headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + API_KEY,
+                "Content-Type": "application/json",
+                Authorization: "Bearer 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",
             },
             body: JSON.stringify({
-              model: "llama-3.3-70b-versatile",
-              messages: [
-                {
-                  role: "user",
-                  content: "Generate a news only in div tag with good css",
-                },
-              ],
+                model: "llama-3.3-70b-versatile",
+                messages: [
+                    {
+                        role: "user",
+                        content: "Generate a news related to "+topic.value+ "only in div tag with good css",
+                    },
+                ],
             }),
-          }
-        );
-        const body = await response.json();
-        console.log(body.choices[0].message.content);
+        }
+    );
+    const body = await response.json();
+    console.log(body.choices[0].message.content);
 
-        let newDiv = document.createElement('div');
-        newDiv.innerHTML = body.choices[0].message.content;
-        document.getElementById('result').appendChild(newDiv);
-      }
-    </script>
+    let newDiv = document.createElement('div');
+    newDiv.innerHTML = body.choices[0].message.content;
+    document.getElementById('result').appendChild(newDiv);
+  }
+</script>
 </html>
